@@ -45,7 +45,8 @@ const manifest = module.exports = {
             plugin: {
                 register: '../lib',
                 options: Config.main
-            }
+            },
+            options: { routes: { prefix: '/api' } }
         }
     ]
 
