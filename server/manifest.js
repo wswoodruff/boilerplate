@@ -39,7 +39,7 @@ const manifest = module.exports = {
             plugin: './plugins/swagger'
         },
         {
-            plugin: './plugins/pinger'
+            plugin: 'strangeluv-project'
         },
         {
             plugin: {
