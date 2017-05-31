@@ -7,6 +7,10 @@
     "test": "lab -a code -L",
     "lint": "lab -dL"
   },
+  "bin": "server/index.js",
+  "pkg": {
+    "scripts": "lib/**/*.js"
+  },
   "dependencies": {
     "boom": "4.x.x",
     "haute-couture": "2.x.x",
