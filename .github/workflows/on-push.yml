@@ -48,7 +48,8 @@ jobs:
           # See which contexts are available in https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts
 
           # More specifically to this example, checkout what's on the github context https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
-          # COMMIT_SHA: ${{github.sha}}
+          # This one is left uncommented because we're not allowed to have an empty 'env:'
+          COMMIT_SHA: ${{github.sha}}
 
           # Above we can find 'postgres-service' set as the key for the service that runs a postgres docker container.
           # You can add other docker services for your tests if you use this pattern, and remember to expose the ports!
