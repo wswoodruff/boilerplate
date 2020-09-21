@@ -1,0 +1,61 @@
+name: api tests
+on: push
+
+jobs:
+  # Label of the container job; visible on Github Actions UI
+  testing-harness:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `testing-harness` executes in
+    container: node:14
+
+    # Service containers to run with `testing-harness`
+    services:
+      # Keys here are used to access these service containers for networking.
+      # The example env var for DB_HOST will be set to 'postgres-service'.
+      postgres-service:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: test-db
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run api tests
+        run: npm test
+        env:
+          # Essentially, your .env file
+
+          # This workflow file supports contexts and var-replacement syntax.
+          # See which contexts are available in https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts
+
+          # More specifically to this example, checkout what's on the github context https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
+          # COMMIT_SHA: ${{github.sha}}
+
+          # Above we can find 'postgres-service' set as the key for the service that runs a postgres docker container.
+          # You can add other docker services for your tests if you use this pattern, and remember to expose the ports!
+          # DB_HOST: postgres-service
+
+          # Add your secrets if you're an admin for the repo in the settings area.
+          # Just name your secrets in CONSTANT_CASE to treat them like
+          # environment var secrets to be passed here!
+          # Note I've escaped brackets here to prevent Github from actually parsing this (non-existent) secret
+          # SECRET_ACCESS_KEY: $\{\{secrets.SECRET_ACCESS_KEY\}\}
