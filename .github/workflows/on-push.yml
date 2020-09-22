@@ -52,6 +52,19 @@ jobs:
           # For example, checkout what's available on the github context: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
           COMMIT_SHA: ${{github.sha}}
 
+          # ========= SECRETS =========
+          # Add your secrets if you're an admin for the repo in the settings area.
+          # I like naming my secrets in CONSTANT_CASE to treat them like environment var secrets to be passed here!
+          # Note I've escaped brackets here to prevent Github from actually parsing this line
+          #  - Note the escaping doesn't actually do anything other than prevent actually parsing this,
+          #    allowing us to talk about it without having code be executed.
+          # SECRET_ACCESS_KEY: $\{\{secrets.SECRET_ACCESS_KEY\}\}
+
+          # ========= App .env =========
+
+          # General
+          # ...
+
           # # ========= UNCOMMENT FOR POSTGRES DB =========
           # # Above we can find 'postgres-service' set as the key for the service that runs a postgres docker container.
           # # You can add other docker services for your tests if you use this pattern — just remember to expose the ports!
@@ -62,10 +75,5 @@ jobs:
           # # This matches the POSTGRES_DB env var given above to the postgres-service docker container instance
           # DB_NAME: test-db
 
-          # ========= SECRETS =========
-          # Add your secrets if you're an admin for the repo in the settings area.
-          # I like naming my secrets in CONSTANT_CASE to treat them like environment var secrets to be passed here!
-          # Note I've escaped brackets here to prevent Github from actually parsing this line
-          #  - Note the escaping doesn't actually do anything other than prevent actually parsing this,
-          #    allowing us to talk about it without having code be executed.
-          # SECRET_ACCESS_KEY: $\{\{secrets.SECRET_ACCESS_KEY\}\}
+          # Logging
+          # LOG_ROOT_PATH: /app/logs
