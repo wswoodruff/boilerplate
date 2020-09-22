@@ -33,6 +33,13 @@ jobs:
     #       - 5432:5432
 
     steps:
+      # # ========= UNCOMMENT TO INSTALL C LIBS =========
+      # - name: Update apt-get before installing
+      #   run: apt-get update
+
+      # - name: Install apt-get packages
+      #   run: apt-get install <package1> <package2> -y
+
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
