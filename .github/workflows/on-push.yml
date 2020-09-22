@@ -43,21 +43,18 @@ jobs:
       - name: Run api tests
         run: npm test
         env:
-          # Essentially, your .env file
+          # Essentially, your test.env file
 
-          # There are also some special context variables available here that might be interesting to you
+          # There are some special context variables available here that might be interesting to you
           # See which contexts are available in https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts
-          # ex: ${{github.sha}}
-
-          # For example, checkout what's available on the github context: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
+          # Ex: github context: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
           COMMIT_SHA: ${{github.sha}}
 
           # ========= SECRETS =========
           # Add your secrets if you're an admin for the repo in the settings area.
-          # I like naming my secrets in CONSTANT_CASE to treat them like environment var secrets to be passed here!
-          # Note I've escaped brackets here to prevent Github from actually parsing this line
-          #  - Note the escaping doesn't actually do anything other than prevent actually parsing this,
-          #    allowing us to talk about it without having code be executed.
+          # I like naming my secrets in CONSTANT_CASE to treat them like environment vars
+          # Ex:
+          # (Backslashes to prevent this from actually being parsed)
           # SECRET_ACCESS_KEY: $\{\{secrets.SECRET_ACCESS_KEY\}\}
 
           # ========= App .env =========
