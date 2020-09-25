@@ -1,4 +1,4 @@
-name: api tests
+name: code push test runner
 on: push
 
 jobs:
@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run api tests
+      - name: Run tests
         run: npm test
         env:
           # Essentially, your test.env file
